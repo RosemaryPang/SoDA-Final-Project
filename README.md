@@ -5,7 +5,7 @@
   After downloading the challenge data as a JSON, the first step in our project is to convert the original JSON files to csv files. Several files provide the code for different steps in this process. The next step is to subset the files to just the cities and businesses of interest. Then, we merged the subsetted files into a single file for analysis. Our analyses include maps and network 
   
  # "Review.py"
-  The "Review.py" file provides code for converting the original JSON file with business reviews (Review.json) to a csv file (Review.csv) using Python.
+ The "Review.py" file provides code for converting the original JSON file with business reviews (Review.json) to a csv file (Review.csv) using Python.
   
 #  "ReadClean.R"
   The "ReadClean.R" provides R code for converting the JSON files with business information and attributes (including location, number of reviews, number of starts, etc.) (Business.json) and user data (including user id and friends) (User.json) to csv files.
