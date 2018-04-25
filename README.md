@@ -16,9 +16,8 @@
   It then gives the code to merge this new file with User.csv based on User id. 
   
 #  "soda501maps.r"
-  This file provides R code for finding the geolocation of the business and changing the size and color of the businesses according to the number of reviews and stars. Additionally, 2000 Decennial Census data is merged to add contextual information such as tract-level poverty to the maps.
+  This file provides R code for finding the geolocation of the business and changing the size and color of the businesses according to the number of reviews and stars. Additionally, 2000 Decennial Census data is used to add contextual information such as tract-level poverty to the maps.
   
  # "Friend network.R"
   This file provides code for plotting a basic network strucuture for reviewer-friend network. We will include network attributes in the next step.
-  
   
