@@ -2,7 +2,9 @@
 
   This is for the SoDA 501 final project. Our group is working on Yelp 2018 challenge data, with a focus on health-related businesses in Pittsburgh, Las Vegas, and Madison.
   
-  After downloading the challenge data as a JSON, the first step in our project is to convert the original JSON files to csv files. Several files provide the code for different steps in this process. The next step is to subset the files to just the cities and businesses of interest. Then, we merged the subsetted files into a single file for analysis. Our analyses include maps and network 
+  After downloading the challenge data as a JSON, the first step in our project is to convert the original JSON files to csv files. Several files provide the code for different steps in this process. The next step is to subset the files to just the cities and businesses of interest. Then, we merged the subsetted files into a single file for analysis. Our analyses include maps of businesses based on their location, number of reviews, and number of starts, along with plots of the user network structure.
+  
+  The Code folder has the following files that provide the code for our project:
   
  # "Review.py"
  The "Review.py" file provides code for converting the original JSON file with business reviews (Review.json) to a csv file (Review.csv) using Python.
