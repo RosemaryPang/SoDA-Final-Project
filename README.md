@@ -25,7 +25,7 @@ This file produces Population and Poverty cluster maps at census tract level usi
 
 # "soda501_processing_maps.R" 
 
-This file produces maps that went into the Report and presentation, specially some maps included in the Appendix. There are other codes that were used for data processing and for trying out and comparing different R packages for map making. 
+This file produces maps that went into the report and presentation, specially some maps included in the Appendix. There are other codes that were used for data processing and for trying out and comparing different R packages for map making. 
   
  # "Friend network.R"
   This file provides code for plotting a basic network structure for reviewer-friend network. We will include network attributes in the next step. This a preliminary step in order to look into the friendship structure of the networks. For this, we separated the data into three different networks (for each city respectively). 
