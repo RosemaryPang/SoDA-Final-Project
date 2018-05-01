@@ -20,6 +20,52 @@ library(RColorBrewer)
 library(sp)
 library(mapview)
 
+################################### Starts: Maps that go into Appendix: Figure 1, 2, and 3. ##########################
+#### Data Input 
+
+LasVegas = read.csv("LasVegas.csv")
+Pitts = read.csv("Pitts.csv")
+Madison = read.csv("Madison.csv")
+
+names(LasVegas)[16] = "Star Ratings"
+names(LasVegas)[17] = "No. of Reviews"
+
+names(Pitts)[16] = "Star Ratings"
+names(Pitts)[17] = "No. of Reviews"
+
+names(Madison)[16] = "Star Ratings"
+names(Madison)[17] = "No. of Reviews"
+
+
+#### ggmap
+
+
+sbbox = make_bbox(lon = LasVegas$longitude, lat = LasVegas$latitude, f = .1)
+sbmap = get_map(location = sbbox, maptype = "roadmap", source = "google")
+ggmap(sbmap) + geom_point(data = LasVegas, mapping = aes(x = LasVegas$longitude, y = LasVegas$latitude, size = `No. of Reviews`, colour = `Star Ratings`))
+
+
+sbbox = make_bbox(lon = Pitts$longitude, lat = Pitts$latitude, f = .1)
+sbmap = get_map(location = sbbox, maptype = "roadmap", source = "google")
+ggmap(sbmap) + geom_point(data = Pitts, mapping = aes(x = Pitts$longitude, y = Pitts$latitude, size = `No. of Reviews`, colour = `Star Ratings`))
+
+
+
+sbbox = make_bbox(lon = Madison$longitude, lat = Madison$latitude, f = .1)
+sbmap = get_map(location = sbbox, maptype = "roadmap", source = "google")
+ggmap(sbmap) + geom_point(data = Madison, mapping = aes(x = Madison$longitude, y = Madison$latitude, size = `No. of Reviews`, colour = `Star Ratings`))
+
+################################### Ends: Maps that go into Appendix: Figure 1, 2, and 3. ##########################
+
+
+
+
+### **************************** Other stuff that didn't go into the report directly, 
+### but these are codes for data processing and for comparing maps from different R packages ******************************
+*****************************************************************************************************************##########
+
+
+##################### Other Maps to check out, but didn't go into the report ################################################# 
 
 Sys.setenv("plotly_username"="arifmasrur")
 Sys.setenv("plotly_api_key"="IOZp8DGb7E1ti9gpvc1j")
@@ -65,23 +111,6 @@ nv_base + theme_nothing() +
   geom_polygon(color = "black", fill = NA) 
 
 
-#### Using ggmap
-
-sbbox = make_bbox(lon = LasVegas$longitude, lat = LasVegas$latitude, f = .1)
-sbmap = get_map(location = sbbox, maptype = "roadmap", source = "google")
-ggmap(sbmap) + geom_point(data = LasVegas, mapping = aes(x = LasVegas$longitude, y = LasVegas$latitude, size = review_count, colour = stars))
-
-
-sbbox = make_bbox(lon = Pitts$longitude, lat = Pitts$latitude, f = .1)
-sbmap = get_map(location = sbbox, maptype = "roadmap", source = "google")
-ggmap(sbmap) + geom_point(data = Pitts, mapping = aes(x = Pitts$longitude, y = Pitts$latitude, size = review_count, colour = stars))
-
-
-sbbox = make_bbox(lon = Madison$longitude, lat = Madison$latitude, f = .1)
-sbmap = get_map(location = sbbox, maptype = "roadmap", source = "google")
-ggmap(sbmap) + geom_point(data = Madison, mapping = aes(x = Madison$longitude, y = Madison$latitude, size = review_count, colour = stars))
-
-
 pittsburgh = "University of Pittsburgh"
 qmap(pittsburgh, zoom = 14)
 
@@ -108,7 +137,7 @@ map <- get_googlemap("pittsburgh", zoom = 12, marker = data.frame(Pitts$longitud
 ggmap(map, extent = 'device')
 
 
-#### Some Data Processing 
+############################################# Some Data Processing for Maps ####################################################
 
 #jsonFile <- fromJSON("business.json", pretty = TRUE)
 
@@ -150,69 +179,9 @@ ggmap(map, extent = 'device')
 # business1 = business %>% separate(postal_code, c("junk", "postal_code_"),"b'", extra = "merge") 
 # business1 = business1 %>% separate(postal_code_, c("postal_code", "junk"),"'", extra = "merge") 
 # 
-# 
-# 
+
 
 projectData = read.csv("MAD_PITT_LAS_info.csv")
-
-# NYT
-NYT <- read.csv(file ="data/NYT.csv") %>%
-  mutate(date = as.Date(date)) %>%
-  mutate(Dataset = "NYT")
-
-# SWB
-SWB<- read.csv(file ="data/SWB.csv") %>%
-  mutate(date = as.Date(date)) %>%
-  mutate(Dataset = "SWB")
-
-# FBIS
-FBIS <- read.csv(file ="data/FBIS.csv") %>%
-  mutate(date = as.Date(date)) %>%
-  mutate(Dataset = "FBIS")
-
-# ICEWS
-ICEWS <- read.csv(file ="data/ICEWS.csv") %>%
-  mutate(date = as.Date(date)) %>%
-  mutate(Dataset = "ICEWS") %>%
-  rename(cameo.root = quad_class)
-
-
-# Manually set colors for event types, called in ggmap later
-event.color <- c("Neutral" = "gray60", 
-                 "Verbal cooperation" = "steelblue1",
-                 "Material cooperation"  = "dodgerblue3", 
-                 "Verbal conflict" = "salmon1", 
-                 "Material conflict" = "firebrick2")
-
-
-# store our color scheme for the different sources
-source.color <- c("NYT" = "dodgerblue3", 
-                  "SWB" = "darkorchid",
-                  "FBIS" = "cyan4", 
-                  "ICEWS" = "firebrick")
-
-
-ggplot(SWB, aes(x = lon, y = lat, color = cameo.root )) +
-  
-  borders("world", color = "gray80", fill = "gray40") +
-  
-  # plot the points
-  geom_point(alpha = .6) + 
-  
-  # Assign our color scheme
-  scale_color_manual(name = "Event Type", values = event.color) +
-  
-  # This resent the alpha to make the legend legible
-  guides(color = guide_legend(override.aes = list(alpha = 1)))+
-  
-  # ggplot map coordinate transform 
-  coord_map(projection = "ortho", orientation = c( 45, 80, 0 ))  +
-  
-  # Change the labels to be a little intuitive
-  labs( title = "SWB Events", 
-        x = "Degrees East/West",
-        y = "Degrees North/South")
-
 
 ### Data with distinct business ID 
 #LasVegas = projectData %>% filter(city == "Las Vegas" & state == "NV") %>% distinct(business_id, .keep_all = T)
@@ -259,25 +228,6 @@ library(plotly)
 # chart_link = api_create(p, filename="yelp review")
 # chart_link
 
-
-
-
-###### Contour and Density Layers ######
-########################################
-Pitts1 = Pitts[, c(14, 15, 17)]
-
-library(ggmap)
-pittsburg = c(lon = -80.026, lat = 40.439)
-
-pittsburg.map =  get_map(location = pittsburg, maptype = "roadmap", zoom = 11, color = "bw")
-
-ggmap(pittsburg.map, extent = "panel", maprange = FALSE) + geom_density2d(data = Pitts1, aes(x = longitude, y = latitude)) +
-  stat_density2d(data = Pitts1, aes(x = longitude, y = latitude, fill = ..level.., alpha = ..level..), size = 0.01, bins = 16, geom = 'polygon') +
-  scale_fill_gradient(low = "green", high = "red") +
-  scale_alpha(range = c(0.00, 0.25), guide = FALSE) +
-  theme(legend.position = "none", axis.title = element_blank(), text = element_text(size = 12))
-  
-  
 
 ####### Census Data Processing 
 
@@ -405,7 +355,19 @@ library("raster")
 ACS_Pitts = read.csv("ACS_Pitts.csv")
 output = "pitts_review_density.asc"
 
+###### ############################################## Contour and Density Layers ##############################################
+Pitts1 = Pitts[, c(14, 15, 17)]
 
+library(ggmap)
+pittsburg = c(lon = -80.026, lat = 40.439)
+
+pittsburg.map =  get_map(location = pittsburg, maptype = "roadmap", zoom = 11, color = "bw")
+
+ggmap(pittsburg.map, extent = "panel", maprange = FALSE) + geom_density2d(data = Pitts1, aes(x = longitude, y = latitude)) +
+  stat_density2d(data = Pitts1, aes(x = longitude, y = latitude, fill = ..level.., alpha = ..level..), size = 0.01, bins = 16, geom = 'polygon') +
+  scale_fill_gradient(low = "green", high = "red") +
+  scale_alpha(range = c(0.00, 0.25), guide = FALSE) +
+  theme(legend.position = "none", axis.title = element_blank(), text = element_text(size = 12))
 
 
 
