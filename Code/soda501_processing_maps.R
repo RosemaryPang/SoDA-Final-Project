@@ -62,7 +62,7 @@ ggmap(sbmap) + geom_point(data = Madison, mapping = aes(x = Madison$longitude, y
 
 ### **************************** Other stuff that didn't go into the report directly, 
 ### but these are codes for data processing and for comparing maps from different R packages ******************************
-*****************************************************************************************************************##########
+###*****************************************************************************************************************##########
 
 
 ##################### Other Maps to check out, but didn't go into the report ################################################# 
