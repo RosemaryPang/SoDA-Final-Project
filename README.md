@@ -31,7 +31,7 @@ This file produces maps that went into the report and presentation, specially so
   This file provides code for plotting a basic network structure for reviewer-friend network. We will include network attributes in the next step. This a preliminary step in order to look into the friendship structure of the networks. For this, we separated the data into three different networks (for each city respectively). 
   
   # "Business Network.R"
-  This file provides code for creating networks of the businesses.
+  This file provides code for examining the relationship between businesses and users, in order to see how popular the businesses are and how many reviews the businesses received. We used a bipartite network to show the businesses and users within the network and changed the size of the businesses to reflect the rating of the business.
   
   # "Descriptive Graphs.R"
   This file provides the code for analyses of descriptive statistics in R. Such analyses include histograms and box plots of average star ratings of various types of businesses and average stars given by reviewers.
