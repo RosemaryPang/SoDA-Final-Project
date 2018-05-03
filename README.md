@@ -33,5 +33,5 @@ This file produces maps that went into the report and presentation, specially so
   # "Business Network.R"
   This file provides code for creating networks of the businesses.
   
-  #
-  
+  # "Descriptive Graphs.R"
+  This file provides the code for analyses of descriptive statistics in R. Such analyses include histograms and box plots of average star ratings of various types of businesses and average stars given by reviewers.
