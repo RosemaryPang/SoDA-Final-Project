@@ -30,3 +30,8 @@ This file produces maps that went into the report and presentation, specially so
  # "Friend network.R"
   This file provides code for plotting a basic network structure for reviewer-friend network. We will include network attributes in the next step. This a preliminary step in order to look into the friendship structure of the networks. For this, we separated the data into three different networks (for each city respectively). 
   
+  # "Business Network.R"
+  This file provides code for creating networks of the businesses.
+  
+  #
+  
